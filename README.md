@@ -1,4 +1,4 @@
- # lagrange_polynomial
+# lagrange_polynomial
 Program służy do obliczania współczynników wielomianu n-tego stopnia na podstawie podanych węzłów.
 
 ## Zasada działania
