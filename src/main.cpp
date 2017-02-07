@@ -53,13 +53,13 @@ int main(int argc, char** argv) {
 	//wygenerowanie współczynników
 	Lagrange lagrange(std::move(final_nodes));
 	lagrange.compute();
-	std::vector<float> indices = lagrange.getIndices();
+	std::vector<double> indices = lagrange.getIndices();
 
 	//prezentacja wyniku
 	char letter = 'a';
 	std::cout << "Znalezione współczynniki:\n";
-	for (float index : indices)
+	for (double index : indices)
 		std::cout << letter++ << ": " << std::setprecision(6) << index << std::endl;
-	
+
 	return 0;
 }

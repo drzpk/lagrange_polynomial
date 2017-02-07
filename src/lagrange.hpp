@@ -16,7 +16,7 @@ n-tego stopnia.
 class Lagrange {
 private:
 	std::vector<Node*> nodes;
-	std::vector<float> indices;
+	std::vector<double> indices;
 public:
 	/**
 	Tworzy nowy obiekt klasy Lagrange.
@@ -37,7 +37,7 @@ public:
 	wcześniej za pomocą metody Lagrange::compute.
 	@return współczynniki wielomianu
 	*/
-	std::vector<float> getIndices() const;
+	std::vector<double> getIndices() const;
 private:
 	Chunk multiply(size_t index);
 	Chunk getChunk(Chunk chunk_1, Chunk chunk_2);

@@ -39,7 +39,7 @@ void Lagrange::compute() {
 		indices.push_back(chunk->at(i)->value);
 }
 
-std::vector<float> Lagrange::getIndices() const {
+std::vector<double> Lagrange::getIndices() const {
 	return indices;
 }
 
@@ -60,11 +60,11 @@ Chunk Lagrange::multiply(size_t index) {
 			continue;
 
 		//mianownik
-		int denominator = nodes[index]->x - nodes[j]->x;
+		double denominator = nodes[index]->x - nodes[j]->x;
 
 		//jednostka z iksem
 		Unit* x_unit = new Unit;
-		x_unit->value = 1.f / (float) denominator;
+		x_unit->value = 1.f / denominator;
 		x_unit->x = true;
 		x_unit->power = 1;
 
