@@ -21,6 +21,9 @@ Autor: Dominik Rzepka
 #define PARAM_PRECISION		4
 #define PARAM_OUTPUT		5
 #define PARAM_HELP			6
+#define PARAM_VERSION		7
+
+#define VERSION				"1.0"
 
 void print_usage(char* application_name, Params& params) {
 	std::cout << "Program pozwala za wyznaczenie współczynników wielomianu "
@@ -108,6 +111,7 @@ int main(int argc, char** argv) {
 	params.addParameter(PARAM_PRECISION, "P", "precision", "ustawia precyzję znaków", true);
 	params.addParameter(PARAM_OUTPUT, "o", "output", "zapisz wyjście do pliku", false);
 	params.addParameter(PARAM_HELP, "h", "help", "wyświetla ten tekst pomocy", false);
+	params.addParameter(PARAM_VERSION, "v", "version", "wyświetla informacje o wersji", false);
 
 	if (!params.parseParams(argc, argv)) {
 		std::cerr << "Błąd: " << params.getErrorDescription();
@@ -117,6 +121,13 @@ int main(int argc, char** argv) {
 	//wyświetl pomoc
 	if (params.hasParameter(PARAM_HELP)) {
 		print_usage(argv[0], params);
+		return 0;
+	}
+
+	//wyświetl informacje o wersji
+	if (params.hasParameter(PARAM_VERSION)) {
+		std::cout << "lagrange_polynomial, wersja " << VERSION
+			<< "\nstworzone przez: Dominik Rzepka\n";
 		return 0;
 	}
 
