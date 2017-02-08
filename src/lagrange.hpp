@@ -21,7 +21,7 @@ public:
 	// generowany jest wyjątek.
 	// Params:
 	// nodes - węzły wielomianu
-	Lagrange(std::vector<Node*>&& nodes);
+	Lagrange(std::vector<Node*>& nodes);
 	Lagrange(const Lagrange&) = delete;
 	Lagrange(Lagrange&&) = delete;
 

@@ -1,6 +1,6 @@
 ﻿#include "lagrange.hpp"
 
-Lagrange::Lagrange(std::vector<Node*>&& nodes) {
+Lagrange::Lagrange(std::vector<Node*>& nodes) {
 	if (nodes.size() < 2)
 		throw std::invalid_argument("liczba węzłów nie może być mniejsza, niż 2");
 
