@@ -134,6 +134,17 @@ int main(int argc, char** argv) {
 	}
 	std::vector<Node*> final_nodes = nodes.getNodes();
 
+	//sprawdzenie, czy dla jednego x nie przyporządkowano więcej,
+	//niż jeden y
+	std::set<double> function_params;
+	for (auto node : final_nodes) {
+		if (function_params.count(node->x)) {
+			std::cerr << "Dla jednego x nie może być zdefiniowane więcej, niż jeden y!";
+			return 1;
+		}
+		function_params.insert(node->x);
+	}
+
 	if (!params.hasParameter(PARAM_DELTA) && !params.hasParameter(PARAM_ITERATIONS)) {
 		//tryb jednego wielomianu
 		single_mode(final_nodes);
