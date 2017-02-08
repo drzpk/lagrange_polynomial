@@ -9,34 +9,30 @@ struct Unit;
 typedef std::vector<Unit*> nChunk;
 typedef nChunk* Chunk;
 
-/**
-Klasa służąca do obliczania współczynników wielomianu
-n-tego stopnia.
-*/
+// Klasa służąca do obliczania współczynników wielomianu
+// n-tego stopnia.
 class Lagrange {
 private:
 	std::vector<Node*> nodes;
 	std::vector<double> indices;
 public:
-	/**
-	Tworzy nowy obiekt klasy Lagrange.
-	Jeśli liczba węzłów jest mniejsza niż 2,
-	generowany jest wyjątek.
-	@param nodes węzły wielomianu
-	*/
+	// Tworzy nowy obiekt klasy Lagrange.
+	// Jeśli liczba węzłów jest mniejsza niż 2,
+	// generowany jest wyjątek.
+	// Params:
+	// nodes - węzły wielomianu
 	Lagrange(std::vector<Node*>&& nodes);
 	Lagrange(const Lagrange&) = delete;
 	Lagrange(Lagrange&&) = delete;
-	/**
-	Oblicza współczynniki funkcji. Współczynniki można 
-	później otrzymać za pomocą metody Lagrange::getIndices.
-	*/
+
+	// Oblicza współczynniki funkcji. Współczynniki można 
+	// później otrzymać za pomocą metody Lagrange::getIndices.
 	void compute();
-	/**
-	Zwraca wektor zawierający współczynniki obliczone
-	wcześniej za pomocą metody Lagrange::compute.
-	@return współczynniki wielomianu
-	*/
+
+	// Zwraca wektor zawierający współczynniki obliczone
+	// wcześniej za pomocą metody Lagrange::compute.
+	// Returns:
+	// współczynniki wielomianu
 	std::vector<double> getIndices() const;
 private:
 	Chunk multiply(size_t index);

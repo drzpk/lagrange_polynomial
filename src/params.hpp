@@ -2,9 +2,7 @@
 
 #include "stdafx.hpp"
 
-/**
-Klasa ma obsługiwać parametry wejściowe programu
-*/
+// Klasa ma obsługiwać parametry wejściowe programu
 class Params {
 private:
 	bool caseSensitive;
@@ -17,74 +15,66 @@ private:
 	bool error;
 	std::string errorDescription;
 public:
-	/**
-	Tworzy nowy obiekt klasy Params
-	@param caseSensitive czy wielkość znaków ma znaczenie
-	*/
+	// Tworzy nowy obiekt klasy Params
+	// Params:
+	// caseSensitive - czy wielkość znaków ma znaczenie
 	Params(bool caseSensitive = true) : caseSensitive(caseSensitive), error(false) {}
-	/**
-	Przetwarza parametry programu. Jeśli przetwarzanie
-	nie powiodło się, zwracana jest wartość 'false'.
-	Opis błędu można uzyskać za pomocą 'getErrorDescription()'.
 
-	@param argc liczba parametrów
-	@param argv podwójny wskaĹşnik na parametry
-	@return czy przetwarzanie się powiodło
-	*/
+	// Przetwarza parametry programu. Jeśli przetwarzanie
+	// nie powiodło się, zwracana jest wartość 'false'.
+	// Opis błędu można uzyskać za pomocą 'getErrorDescription()'.
+	// Params:
+	// argc - liczba parametrów
+	// argv - podwójny wskaĹşnik na parametry
+	// Returns:
+	// czy przetwarzanie się powiodło
 	bool parseParams(int argc, char** argv);
-	/**
-	Dodaje nowy parametr. Każdy parametr posiada
-	identyfikator używany póĹşniej w innych metodach
-	obiektu. Skrót i nazwa parametru powinny być
-	podane bez wiodących myślników.
 
-	@param id identyfikator parametru
-	@param shortcut skrót parametru
-	@param name pełna nazwa parametru
-	@param desc opis parametru
-	@param hasValue czy parametr ma wartość
-	*/
+	// Dodaje nowy parametr. Każdy parametr posiada
+	// identyfikator używany póĹşniej w innych metodach
+	// obiektu. Skrót i nazwa parametru powinny być
+	// podane bez wiodących myślników.
+	// Params:
+	// id - identyfikator parametru
+	// shortcut - skrót parametru
+	// name - pełna nazwa parametru
+	// desc - opis parametru
+	// hasValue - czy parametr ma wartość
 	void addParameter(int id, const char* shortcut, const char* name, const char* desc, bool hasValue = true);
-	/**
-	Sprawdza, czy parametr o podanym identyfikatorze istnieje.
-	@param id identyfikator parametru
-	@return czy parametr istnieje
-	*/
+
+	// Sprawdza, czy parametr o podanym identyfikatorze istnieje.
+	// Params:
+	// id - identyfikator parametru
+	// czy - parametr istnieje
 	bool hasParameter(int id) const;
-	/**
-	Sprawdza, czy wystąpił błąd
-	@return status flagi błędu
-	*/
+
+	// Sprawdza, czy wystąpił błąd
 	bool isError() const;
-	/**
-	Zwraca opis błędu przetwarzania parametrów.
-	@return opis błędu
-	*/
+
+	// Zwraca opis błędu przetwarzania parametrów.
 	std::string getErrorDescription() const;
-	/**
-	Wypisuje w konsoli wszyskie parametry, każdy
-	w osobnej linii. Parametr indent służy do ustawienia
-	wcięcia każdej linii.
-	@param indent wcięcie linii
-	@return parametry
-	*/
+
+	// Wypisuje w konsoli wszyskie parametry, każdy
+	// w osobnej linii. Parametr indent służy do ustawienia
+	// wcięcia każdej linii.
+	// Params:
+	// indent - wcięcie linii
+	// Returns:
+	// parametry
 	std::string printParams(int indent) const;
-	/**
-	Zwraca całkowitą wartość liczbową parametru.
-	@param id identyfikator parametru
-	@return wartość całkowita parametru
-	*/
+
+	// Zwraca całkowitą wartość liczbową parametru.
+	// Params:
+	// id - identyfikator parametru
 	int getInt(int id) const;
-	/**
-	Zwraca zmiennoprzecinkową wartość liczbową parametru.
-	@param id identyfikator parametru
-	@return wartość zmiennoprzecinkowa parametru
-	*/
+
+	// Zwraca zmiennoprzecinkową wartość liczbową parametru.
+	// Params:
+	// id - identyfikator parametru
 	float getFloat(int id) const;
-	/**
-	Zwraca wartość tekstową parametru.
-	@param id identyfikator parametru
-	@return wartość tekstowa parametru
-	*/
+
+	// Zwraca wartość tekstową parametru.
+	// Params:
+	// id - identyfikator parametru
 	std::string getString(int id) const;
 };
