@@ -76,3 +76,8 @@ Program można skompilować bezpośrednio ze źródeł znajdujących się w tym 
 **Istnieje również możliwość pobrania gotowego pliku exe:** [LINK](https://drive.google.com/file/d/0ByHjPTrDWEJ1bWhUZ3RGWEs5blU/view?usp=sharing)
 
 Jeśli podczas uruchamiania pojawia się błąd krytyczny, wymagane jest pobranie pakietów dystrybucyjnych z [TEJ](https://www.microsoft.com/pl-pl/download/details.aspx?id=48145) strony.
+
+### Linux
+Program został przystosowany do uruchamiania w systemie Linux. W tym celu trzeba go ręcznie skompilować. Aby to zrobić, należy pobrać repozytorium i w jego głównym katalogu uruchomić
+polecenie `make`. Spowoduje to kompilację i utworzenie pliku wykonywalnego `lagrange_polynomial`. Składnia programu jest identyczna, z tą różnicą, że w celu uruchomienia programu
+koniecznie będzie poprzedzenie jego nazwy symbolem bieżącego folderu: `./lagrange_polynomial`.
