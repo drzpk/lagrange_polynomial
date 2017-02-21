@@ -30,12 +30,12 @@ void print_usage(char* application_name, Params& params) {
 		<< "za pomoca interpolacji wielomianowej metoda wielomianu Lagrange'a.\n"
 		<< "  Użycie programu: " << application_name << " [-dioh] -k (x;y)(x;y)...\n"
 		<< "Dla obliczenia współczynników wielomianu n-tego stopnia należy podać n+1 węzłów\n"
-		<< "  Dostępne parametry:\n" << params.printParams(4);
+		<< "  Dostępne parametry:\n" << params.printParams(4) << "\n";
 }
 
 void print_wrong_syntax(char* application_name) {
 	std::cerr << "niepoprawna składnia. Aby uzyskać pomoc, napisz "
-		<< application_name << " -h";
+		<< application_name << " -h\n";
 }
 
 void single_mode(std::vector<Node*>& nodes) {
@@ -52,10 +52,17 @@ void single_mode(std::vector<Node*>& nodes) {
 }
 
 bool will_fit_in_console(size_t width) {
+#ifdef _WIN32
 	CONSOLE_SCREEN_BUFFER_INFO info;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
 
 	return info.srWindow.Right - info.srWindow.Left + 1 >= (int)width;
+#else
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    
+    return w.ws_col >= width;
+#endif
 }
 
 int table_mode(std::vector<Node*>& nodes, size_t iterations, Node* delta, bool scientific, bool output, int precision) {
@@ -75,7 +82,7 @@ int table_mode(std::vector<Node*>& nodes, size_t iterations, Node* delta, bool s
 			std::cout << ss.str();
 		else {
 			std::cerr << "Tabela jest za szeroka, aby zmieścić się w oknie konsoli. "
-				<< "Poszerz okno lub użyj parametru -o, aby zapisać wynik do pliku";
+				<< "Poszerz okno lub użyj parametru -o, aby zapisać wynik do pliku\n";
 			return -1;
 		}
 	}
@@ -83,13 +90,13 @@ int table_mode(std::vector<Node*>& nodes, size_t iterations, Node* delta, bool s
 		std::ofstream file;
 		file.open("output.txt", std::ios::out | std::ios::trunc);
 		if (!file.good()) {
-			std::cerr << "Błąd: nie udało się otworzyć pliku";
+			std::cerr << "Błąd: nie udało się otworzyć pliku\n";
 			return 1;
 		}
 
 		file << ss.str();
 		file.close();
-		std::cout << "Wynik został zapisany do pliku";
+		std::cout << "Wynik został zapisany do pliku\n";
 	}
 
 	return 0;
@@ -140,7 +147,7 @@ int main(int argc, char** argv) {
 	//parsowanie węzłów
 	Nodes nodes;
 	if (!nodes.parse(params.getString(PARAM_NODES))) {
-		std::cerr << "Błąd przetwarzania węzłów: " << nodes.getErrorDesc();
+		std::cerr << "Błąd przetwarzania węzłów: " << nodes.getErrorDesc() << "\n";
 		return 1;
 	}
 	std::vector<Node*> final_nodes = nodes.getNodes();
@@ -150,7 +157,7 @@ int main(int argc, char** argv) {
 	std::set<double> function_params;
 	for (auto node : final_nodes) {
 		if (function_params.count(node->x)) {
-			std::cerr << "Dla jednego x nie może być zdefiniowane więcej, niż jeden y!";
+			std::cerr << "Dla jednego x nie może być zdefiniowane więcej, niż jeden y!\n";
 			return 1;
 		}
 		function_params.insert(node->x);
@@ -163,30 +170,30 @@ int main(int argc, char** argv) {
 	else {
 		//tryb tablicy
 		if (!params.hasParameter(PARAM_DELTA)) {
-			std::cerr << "Nie podano delty (-d)";
+			std::cerr << "Nie podano delty (-d)\n";
 			return 1;
 		}
 		if (!params.hasParameter(PARAM_ITERATIONS)) {
-			std::cerr << "Nie podano liczby iteracji (-i)";
+			std::cerr << "Nie podano liczby iteracji (-i)\n";
 			return 1;
 		}
 
 		//węzeł delta
 		Nodes delta_node;
 		if (!delta_node.parse(params.getString(PARAM_DELTA))) {
-			std::cerr << "Błąd delty: " << delta_node.getErrorDesc();
+			std::cerr << "Błąd delty: " << delta_node.getErrorDesc() << "\n";
 			return 1;
 		} 
 		std::vector<Node*> delta_nodes = delta_node.getNodes();
 		if (delta_nodes.size() != 1) {
-			std::cerr << "Musi być podana dokładnie jedna delta";
+			std::cerr << "Musi być podana dokładnie jedna delta\n";
 			return 1;
 		}
 		
 		//liczba iteracji
 		int iterations = params.getInt(PARAM_ITERATIONS);
 		if (iterations < 1) {
-			std::cerr << "Liczba iteracji nie może być mniejsza, niż 1";
+			std::cerr << "Liczba iteracji nie może być mniejsza, niż 1\n";
 			return 1;
 		}
 
@@ -197,7 +204,7 @@ int main(int argc, char** argv) {
 		if (params.hasParameter(PARAM_PRECISION)) {
 			precision = params.getInt(PARAM_PRECISION);
 			if (precision < 0) {
-				std::cerr << "Prezycja nie może być mniejsza, niż 0";
+				std::cerr << "Prezycja nie może być mniejsza, niż 0\n";
 				return 1;
 			}
 		}

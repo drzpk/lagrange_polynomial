@@ -14,7 +14,13 @@
 #include <string>
 #include <string.h>
 #include <vector>
+
+#ifdef _WIN32
 #include <Windows.h>
+#else
+#include <unistd.h>
+#include <sys/ioctl.h>
+#endif
 
 
 //jeśli zdefiniowane, wyświetlane są informacje debugowania

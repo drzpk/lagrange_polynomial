@@ -3,7 +3,7 @@
 #include "stdafx.hpp"
 
 
-extern struct Node;
+struct Node;
 
 
 // Klasa służy do konwersji ciągu znaków reprezentującego
