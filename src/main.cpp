@@ -23,7 +23,7 @@ Autor: Dominik Rzepka
 #define PARAM_HELP			6
 #define PARAM_VERSION		7
 
-#define VERSION				"1.0"
+#define VERSION				"1.1"
 
 void print_usage(char* application_name, Params& params) {
 	std::cout << "Program pozwala za wyznaczenie współczynników wielomianu "

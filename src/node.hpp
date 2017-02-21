@@ -38,6 +38,8 @@ public:
 
 	// Zwraca opis błędu, jeśli jakiś wystąpił.
 	std::string getErrorDesc() const;
+private:
+	float convert(const std::string& input) const;
 };
 
 struct Node {
